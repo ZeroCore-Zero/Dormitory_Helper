@@ -1,0 +1,12 @@
+{
+    "cas": {
+        "username":"YourBUPTID",
+        "password":"YourBUPTPSWD"
+    },
+    "info": {
+        "partmentId": "",
+        "floorId": 0,
+        "dromNumber": "",
+        "areaid": 0
+    }
+}
