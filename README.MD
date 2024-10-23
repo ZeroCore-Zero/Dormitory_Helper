@@ -1,11 +1,15 @@
-# IMPORTANT
+# Dormitory Helper
 
-**Can run but with large number of BUGs.**(so sad...)
+An assistant application provides some useful tools in dormitory.
 
-# Use Toturial
+## How to use
 
 Backend:
+> [!IMPORTANT]
+> There are a number of bugs need to help, because this is an old version, and need to refactoring.
+
 ```bash
+    cd ./backend
     pip install -r requirements.txt
     python app.py
 ```
@@ -16,3 +20,7 @@ Frontend:
     npm install
     npm run dev
 ```
+
+## How to develop
+
+See [developer guide](./DEV.MD)
