@@ -1,4 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router";
+import { useCookies } from "@vueuse/integrations/useCookies";
 // import axios from 'axios';
 
 const Home = () => import('../views/Home.vue');
@@ -24,10 +25,11 @@ const router = createRouter({
 
 // For Login Authentication
 router.beforeEach((to, from) => {
-    const token = document.cookie["token"];
+    const token = useCookies().get(["token"]);
+    console.log("token is: " + token);
     if(!token && to.name !== "login")  return {name: "login"};
     if(!token)  return;
-    
+    // verify token
 })
 
 export default router;
