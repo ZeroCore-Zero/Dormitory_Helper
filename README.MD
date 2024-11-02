@@ -23,4 +23,4 @@ Frontend:
 
 ## How to develop
 
-See [developer guide](./DEV.MD)
+See [developer guide](./docs/DEV.MD)
