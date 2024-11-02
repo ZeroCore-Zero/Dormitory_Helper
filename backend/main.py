@@ -2,6 +2,9 @@ from utlis.bupt_auth import BUPT_CAS
 import json
 import os
 
+from utlis.app import app
+from utlis.db import db
+
 
 def get_info(session, data):
     url = "https://app.bupt.edu.cn/buptdf/wap/default/search"
@@ -30,4 +33,5 @@ def main():
 
 
 if __name__ == '__main__':
+    db.init_app(app)
     main()
