@@ -1,9 +1,9 @@
 <template>
     <el-container>
-        <el-header>
-            <el-text type="primary" size="large">登录</el-text> <!--需要居中-->
+        <el-header class="myheader">
+            <el-text class="mytxt" type="primary">登录</el-text> <!-- 文字已居中 -->
         </el-header>
-        <el-main>
+        <el-main class="mymain">
             <el-form label-width="auto">
                 <el-alert
                     title="登录注意事项"
@@ -15,7 +15,7 @@
                     <el-select
                         v-model="form.login_opt"
                         placeholder="选择一种登录方式"
-                        @change="value => {opt_hint = login_options.find(option => option.value === value).hint}"
+                        @change="value => {opt_hint = login_options.find(option => option.value === value).hint} "
                     >
                         <el-option
                             v-for="item in login_options"
@@ -109,3 +109,23 @@ const onSubmit = () => {
     submit_loading.value = false;
 }
 </script>
+
+<style>
+.myheader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* 确保容器高度足够 */
+    text-align: center;
+}
+.mytxt
+{
+    padding: 12px 12px; /* 增大内边距 */
+    font-size: 20px; /* 增大字体 */
+    line-height: 1.5; /* 增大行高 */
+}
+.mymain
+{
+    padding: 0px 5px 20px 5px;
+}
+</style>
