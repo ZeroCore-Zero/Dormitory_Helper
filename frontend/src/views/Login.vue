@@ -1,7 +1,7 @@
 <template>
     <el-container>
         <el-header class="myheader">
-            <el-text class="mytxt" type="primary">登录</el-text> <!-- 文字已居中 -->
+            <el-text class="mytxt" type="primary">登录</el-text>
         </el-header>
         <el-main class="mymain">
             <el-form label-width="auto">
@@ -15,7 +15,7 @@
                     <el-select
                         v-model="form.login_opt"
                         placeholder="选择一种登录方式"
-                        @change="value => {opt_hint = login_options.find(option => option.value === value).hint} "
+                        @change="value => {opt_hint = login_options.find(option => option.value === value).hint}"
                     >
                         <el-option
                             v-for="item in login_options"
