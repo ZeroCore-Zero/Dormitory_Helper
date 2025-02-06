@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from .utlis.response.response import generate_response, empty_response
+from .utlis.response.response import empty_response
 from .utlis.secrets import generate_token, verify_token
 from .db import User
 from buptmw import BUPT_Auth
@@ -63,4 +63,4 @@ def login_fun():
     secret_key[username] = token_hex(16)
     token = generate_token(payload, secret_key[username])
 
-    return jsonify(generate_response(data={"token": token}))
+    return jsonify({"token": token})
