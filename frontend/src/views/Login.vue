@@ -53,6 +53,7 @@ import {
 } from 'element-plus';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import { useCookies } from '@vueuse/integrations/useCookies';
 
 const form = reactive({
     login_opt: "",
@@ -62,6 +63,7 @@ const form = reactive({
 });
 const opt_hint = ref();
 const submit_loading = ref(false);
+const router = useRouter();
 
 const login_options = [
     {
@@ -77,34 +79,32 @@ const login_options = [
 ]
 
 const onSubmit = () => {
-    // console.log(JSON.stringify(form));
-    // return;
     submit_loading.value = true;
-    axios.post("http://dormitory.lingzc.com/api/login", {
-        form
-    })
+    const payload_str = JSON.stringify(form);
+    axios.post("/api/auth/login", JSON.parse(payload_str))
     .then(response => {
-        if(response.data["success"]) {
-            ElMessage({
-                message: "登录成功，即将跳转",
-                type: 'success',
-                onClose: () => useRouter().push({name: "home"})
-            });
-        }
-        else {
-            ElMessage({
-                message: "用户名或密码错误，请检查填写是否正确或登陆方式选择错误",
-                type: 'error'
-            });
-        }
+        console.log(response.data["code"]);
+        useCookies().set("token", response.data["data"]["token"]);
+        ElMessage({
+            message: "登录成功，即将跳转",
+            type: 'success',
+            onClose: () => router.push({name: "home"})
+        });
     })
     .catch(error => {
         console.log("There has an error:");
         console.log(error);
-        ElMessageBox.alert(
-            "发生了一个错误，请稍后重试或联系管理员请求帮助",
-            "错误"
-        )
+        let title, message, type;
+        if(error.status === 401) {
+            title = "错误";
+            message = "用户名或密码错误，请检查填写是否正确或登陆方式选择错误";
+            type = 'error';
+        } else {
+            title = "错误";
+            message = "发生了一个错误，请稍后重试或联系管理员请求帮助";
+            type = 'error';
+        }
+        ElMessageBox({title, message, type});
     })
     submit_loading.value = false;
 }

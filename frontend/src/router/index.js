@@ -54,7 +54,6 @@ const router = createRouter({
 // For Login Authentication
 router.beforeEach((to, from) => {
     const token = useCookies().get(["token"]);
-    console.log("token is: " + token);
     if(!token && to.name !== "login")  return {name: "login"};
     if(!token)  return;
     // verify token
