@@ -4,7 +4,7 @@
             <el-text class="mytxt" type="primary">登录</el-text>
         </el-header>
         <el-main class="mymain">
-            <el-form label-width="auto">
+            <el-form label-width="auto" class="login-form">
                 <el-alert
                     title="登录注意事项"
                     type="info"
@@ -31,11 +31,13 @@
                     <el-form-item label="密码">
                         <el-input v-model="form.password" show-password placeholder="请输入密码" />
                     </el-form-item>
-                    <el-form-item>
-                        <el-checkbox v-model="form.stay_login_in" label="保持登录" border />
+                    <el-form-item class="centered-item">
+                        <div class="centered-checkbox">
+                            <el-checkbox v-model="form.stay_login_in" label="保持登录" border />
+                        </div>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="onSubmit" :loading="submit_loading">登录</el-button>
+                        <el-button type="primary" @click="onSubmit" :loading="submit_loading" class="full-width">登录</el-button>
                     </el-form-item>
                 </template>
             </el-form>
@@ -84,7 +86,7 @@ const onSubmit = () => {
     axios.post("/api/auth/login", JSON.parse(payload_str))
     .then(response => {
         console.log(response.data["code"]);
-        useCookies().set("token", response.data["token"]);
+        useCookies().set("token", response.data["data"]["token"]);
         ElMessage({
             message: "登录成功，即将跳转",
             type: 'success',
@@ -115,17 +117,57 @@ const onSubmit = () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%; /* 确保容器高度足够 */
+    height: 60px;
     text-align: center;
+    background-color: #0073e6;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 5px;
+
 }
-.mytxt
-{
-    padding: 12px 12px; /* 增大内边距 */
-    font-size: 20px; /* 增大字体 */
-    line-height: 1.5; /* 增大行高 */
+
+.mytxt {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
 }
-.mymain
-{
-    padding: 0px 5px 20px 5px;
+
+.mymain {
+    padding: 20px;
+    background-color: #fff;
+    min-height: 100vh;
 }
+
+.login-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.alert-box {
+    margin-bottom: 20px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.centered-item {
+    display: flex;
+    justify-content: center;
+}
+
+.centered-checkbox {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
 </style>
