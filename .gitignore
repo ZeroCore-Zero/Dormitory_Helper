@@ -14,7 +14,7 @@ frontend/dist
 
 #backend
 backend/instance
-backend/config/*.json
+backend/config.toml
 
 # local env files
 .env.local
