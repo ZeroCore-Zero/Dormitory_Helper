@@ -85,8 +85,7 @@ const onSubmit = () => {
     const payload_str = JSON.stringify(form);
     axios.post("/api/auth/login", JSON.parse(payload_str))
     .then(response => {
-        console.log(response.data["code"]);
-        useCookies().set("token", response.data["data"]["token"]);
+        useCookies().set("token", response.data["token"]);
         ElMessage({
             message: "登录成功，即将跳转",
             type: 'success',
